@@ -1,0 +1,61 @@
+<body>
+  <center>
+    <div class="title">
+      <h1>
+        <span style='color: blue'>C</span>
+        <span style='color: red'>o</span>
+        <span style='color: green'>s</span>
+        <span style='color: purple'>t</span>
+        <span style='color: grey'>-</span>
+        <span style='color: orange'>G</span>
+        <span style='color: #1C68D9'>o</span>
+      </h1>
+      <p>Your <b>Cost</b> calculating <b>Go</b> to App!</p>
+    </div>
+  </center>
+
+  <div class="main">
+    <h2>Distance and Time</h1>
+    <% @data['routes'].each do |k| %>
+      <% k['legs'].each do |i| %>
+        <%= i['distance'] %>
+        <br>
+        <%= i['duration'] %>
+      <% end %>
+    <% end %>
+
+  </div>
+</body>
+
+<style>
+  body {
+    background-color: #1CD9B4; 
+  }
+
+  b {
+    color: green;
+  }
+
+  .title {
+    border: dashed;
+    border-color: blue red green yellow;
+    border-radius: 5px 20px 5px 20px;
+    width: 250px;
+  }
+
+  h1 {
+    text-align:center;
+    text-decoration: underline;
+    text-decoration-color: purple;
+  }
+
+  p {
+    text-align: center;
+  }
+
+  h2 {
+    text-align: center;
+  }
+
+
+</style>

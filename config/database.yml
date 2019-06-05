@@ -1,0 +1,12 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: costgo_app_development
+  pool: 2
+
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: costgo_app_production
+  pool: 2
