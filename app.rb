@@ -10,7 +10,10 @@ current_dir = Dir.pwd
 Dir["#{current_dir}/models/*.rb"].each { |file| require file }
 
 get '/home' do 
+  
   erb :home
+  
+  # redirect "https://maps.googleapis.com/maps/api/directions/json?origin=#{params[:starting]}&destination=#{params[:ending]}&key=#{ENV['API_KEY']}"
 end 
 
 get '/info' do 
