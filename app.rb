@@ -3,6 +3,8 @@ require 'sinatra/reloader'
 require 'sinatra/activerecord'
 require 'http'
 require 'figaro'
+require 'yaml'
+ENV =  YAML.load_file('config/application.yml')
 
 current_dir = Dir.pwd
 Dir["#{current_dir}/models/*.rb"].each { |file| require file }
