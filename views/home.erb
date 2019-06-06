@@ -6,17 +6,19 @@
     
   <h1>Enter the information!</h1>
     <div class="container">
-      <form>
+
+      <form action="/info">
         <div class="form-group">
-          <p>Starting<input type="text" class="form-control" id="starting" placeholder="Enter Start"></p>
+          <p>Starting<input type="text" class="form-control" name="origin" id="origin" placeholder="Enter Start"></p>
           <small id="text" class="form-text text-muted">e.g. 123 street or Disneyland</small>
         </div>
         <div class="form-group">
-          <p>Ending<input type="text" class="form-control" id="end" placeholder="Enter End"></p>
+          <p>Ending<input type="text" class="form-control" name="destination" id="destination" placeholder="Enter End"></p>
           <small id="text" class="form-text text-muted">e.g. Disneyworld or Chicago</small>
         </div>
         <center><button type="submit" class="btn btn-primary">Submit</button></center>
       </form>
+
     </div> 
 
 
