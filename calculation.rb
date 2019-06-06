@@ -20,7 +20,6 @@ end
 
 def calculate_transit(response)
   data = response.parse["routes"][0]["legs"][0]
-  # response.parse["routes"][0]["legs"][0]["travel_mode"]
   total = 0
   train_total = 0
   data["steps"].each do |step|
@@ -30,9 +29,6 @@ def calculate_transit(response)
       elsif step["transit_details"]["line"]['vehicle']["name"] == "Bus"
         total += 2.25
       end
-      p "total"
-      p total
-      p train_total
     end    
   end
   train_total = 10 if train_total > 10
