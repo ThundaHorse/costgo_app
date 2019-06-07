@@ -14,7 +14,8 @@ def calculate_gas(response)
   distance = data["distance"]
   distance_value =  distance["value"]
   miles = distance_value/1609.344
-  total = miles * 2.80
+  mpg = miles/22.0
+  total = mpg * 2.80
   total.round
 end
 
@@ -47,6 +48,8 @@ miles = distance_value/1609.344
 duration_text = duration["text"]
 # duration_value =  duration["value"]
 # hours = duration_value/3600.00
+p calculate_gas(response)
+
 p calculate_transit(response2)
 
 
