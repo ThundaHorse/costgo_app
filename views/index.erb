@@ -7,35 +7,57 @@
     <center>
       <div class="title">
         <h1>
-          <span style='color: blue'>C</span>
-          <span style='color: red'>o</span>
-          <span style='color: green'>s</span>
-          <span style='color: purple'>t</span>
+          <span style='color: #09BDBD'>C</span>
+          <span style='color: #09BD69'>o</span>
+          <span style='color: #09BD3F'>s</span>
+          <span style='color: #09BD15'>t</span>
           <span style='color: grey'>-</span>
-          <span style='color: orange'>G</span>
-          <span style='color: #1C68D9'>o</span>
+          <span style='color: #39BD09'>G</span>
+          <span style='color: #6FBD09'>o</span>
         </h1>
         <p>Your <b>Cost</b> calculating <b>Go</b> to App!</p>
       </div>
     </center>
-    <br>
-    <br>
+      <br>
+      <br>
+        <div class="container"> <!-- container -->
+          <div class="card-group"> <!-- card-group -->
+            <% @data['routes'].each do |k| %>
+              <% k['legs'].each do |i, v| %>
+                
+            <div class="card"> <!-- card begin -->
+              <img src="images/directions.png" class="card-img-top" alt="directions" style="height=250px; width:250px;">
+                <div class="card-body"> <!-- card body -->
+                  <h5 class="card-title">Distance and Time</h5>
+                    <p class="card-text">Starting: <%= i['start_address'] %></p>
+                    <p class="card-text">Ending: <%= i['end_address'] %></p>
+                    <p class="lead"><%= i['distance']['text'] %> | <%= i['duration']['text'] %></p>
+                </div> <!-- card body end -->
+            </div> <!--card end -->
+            
+            <div class="card">
+              <img src="images/directions.png" class="card-img-top" alt="directions" style="height=250px; width:250px;">
+                <div class="card-body">
+                  <h5 class="card-title">Distance and Time</h5>
+                    <p class="card-text">Starting: <%= i['start_address'] %></p>
+                    <p class="card-text">Ending: <%= i['end_address'] %></p>
+                    <p class="lead"><%= i['distance']['text'] %> | <%= i['duration']['text'] %></p>
+              </div>
+            </div>
 
-  <div class="jumbotron jumbotron-fluid">
-    <div class="container">
-      <h1 class="display-4">Distance and Time</h1>      
-      <% @data['routes'].each do |k| %>
-        <% k['legs'].each do |i, v| %>
-          <p class="lead1">Starting: <%= i['start_address'] %></p>
-          <p class="lead1">Ending: <%= i['end_address'] %></p>
-          <br>
-          <p class="lead"><%= i['distance']['text'] %> | <%= i['duration']['text'] %></p>
+            <div class="card"> <!-- card begin -->
+              <img src="images/directions.png" class="card-img-top" alt="directions" style="height=250px; width:250px;">
+                <div class="card-body"> <!-- card body -->
+                  <h5 class="card-title">Distance and Time</h5>
+                    <p class="card-text">Starting: <%= i['start_address'] %></p>
+                    <p class="card-text">Ending: <%= i['end_address'] %></p>
+                    <p class="lead"><%= i['distance']['text'] %> | <%= i['duration']['text'] %></p>
+                </div> <!-- card body end -->
+            </div> <!--card end -->
         <% end %>
       <% end %>
-
-    </div>
-  </div>
-
+    </div> <!-- end card group --> 
+  </div> <!-- end container -->
 
 
 
@@ -57,13 +79,17 @@
 
   .title {
     border: dashed;
-    border-color: #3BAFAF #3B3BAF #4FD89C yellow;
+    border-color: #3BAFAF #3B3BAF #4FD89C #117111;
     border-radius: 5px 20px 5px 20px;
     width: 250px;
   }
 
   .jumbotron {
     background-image: url("images/seigaiha.png");
+  }
+
+  .card-title {
+    text-align: center;
   }
 
   h1 {
