@@ -26,10 +26,10 @@ class Trip
     @end_location = end_location
     @car_time_text = 0
     @car_time_value = 0
-    @car_hours = @car_time_value/3600.00  
+    @car_hours = 0  
     @transit_time_text = 0
     @transit_time_value = 0
-    @transit_hours = @transit_time_value/3600.00  
+    @transit_hours = 0  
     @toll = calculate_toll(trip_data: "toll_type")
     @gas_cost = calculate_gas
     @transit_cost = calculate_transit
@@ -49,6 +49,7 @@ class Trip
     data = @response_car.parse["routes"][0]["legs"][0]
     @car_time_text = data["duration"]["text"]
     @car_time_value = data["duration"]["value"]
+    @car_hours = @car_time_value/3600.00 
     distance = data["distance"]
     distance_value =  distance["value"]
     miles = distance_value/1609.344
@@ -66,6 +67,7 @@ class Trip
     data = @response_transit.parse["routes"][0]["legs"][0]
     @transit_time_text = data["duration"]["text"]
     @transit_time_value = data["duration"]["value"]
+    @transit_hours = @transit_time_value/3600.00 
     total = 0
     train_total = 0
     data["steps"].each do |step|
