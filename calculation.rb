@@ -6,12 +6,22 @@ FIGARO =  YAML.load_file('config/application.yml')
 class Trip
   attr_accessor :car_time_text, :car_time_value, :car_hours, :transit_time_text, :transit_time_value, :transit_hours, :gas_cost, :transit_cost,  :start_location, :end_location
 
+  # def initialize(trip_data)
   def initialize(start_location, end_location, toll_type="prepaid")
-    @response_car = HTTP.get("https://maps.googleapis.com/maps/api/directions/json?origin=#{start_location}&destination=#{end_location}&key=#{FIGARO['API_KEY']}")
+    # @response_car = trip_data: "car_http"
+    # @response_transit = trip_data: "transit_http"
+    # @response_toll = trip_data: "toll_http"
+    # @start_location = trip_data: start_location
+    # @end_location = trip_data: end_location
+
+    @response_car = HTTP.get("https://maps.googleapis.com/maps/api/directions/json?origin=215+w+ohio+st&destination=Niagra+Falls&key=#{FIGARO['API_KEY']}")
     @response_transit = HTTP.get("https://maps.googleapis.com/maps/api/directions/json?origin=215+w+ohio+st&destination=Niagra+Falls&&mode=transit&key=#{FIGARO['API_KEY']}")
-    @response_toll = 
-
-
+    @response_toll = HTTP.headers("x-api-key" => 'DQ50B1qFE0ao4mo4oYAFG8qE2uJRfyrQ6jOYUOqN', "Content-Type" => "application/json").post(
+                        'https://dev.tollguru.com/beta00/calc/gmaps',
+                        json: {
+                              "from": {"address": start_location},
+                              "to": {"address": end_location}
+                            })
     @start_location = start_location
     @end_location = end_location
     @car_time_text = 0
@@ -20,20 +30,14 @@ class Trip
     @transit_time_text = 0
     @transit_time_value = 0
     @transit_hours = @transit_time_value/3600.00  
-    @toll = calculate_toll(toll_type)
+    @toll = calculate_toll(trip_data: "toll_type")
     @gas_cost = calculate_gas
     @transit_cost = calculate_transit
   end
 
   def calculate_toll(toll_type)
-    prepaid_toll = 0
-    cash_toll = 0
-    @response_toll.parse["routes"].each do |data|
-      if data["costs"]["prepaidCard"] != nil
-        prepaid_toll += data["costs"]["prepaidCard"]
-        cash_toll += data["costs"]["cash"]
-      end
-    end
+    prepaid_toll = @response_toll.parse["routes"][0]["costs"]["prepaidCard"]
+    cash_toll = @response_toll.parse["routes"][0]["costs"]["cash"]
     if toll_type == "cash"
       return cash_toll
     else
@@ -42,9 +46,9 @@ class Trip
   end
 
   def calculate_gas
-    data = response_car.parse["routes"][0]["legs"][0]
-    @car_time_text = data["text"]
-    @car_time_value = data["value"]
+    data = @response_car.parse["routes"][0]["legs"][0]
+    @car_time_text = data["duration"]["text"]
+    @car_time_value = data["duration"]["value"]
     distance = data["distance"]
     distance_value =  distance["value"]
     miles = distance_value/1609.344
@@ -59,9 +63,9 @@ class Trip
     # Transfer(up to 2 additional rides within 2 hrs) .25
     l_train_fare = 2.50
     day_cta_pass = 10
-    data = response_transit.parse["routes"][0]["legs"][0]
-    @transit_time_text = data["text"]
-    @transit_time_value = data["value"]
+    data = @response_transit.parse["routes"][0]["legs"][0]
+    @transit_time_text = data["duration"]["text"]
+    @transit_time_value = data["duration"]["value"]
     total = 0
     train_total = 0
     data["steps"].each do |step|
@@ -97,11 +101,14 @@ end
 
 
 
-
-
-
-
-
+trip = Trip.new("Milwaukee, WI", "Chicago, IL")
+# p trip
+p trip.car_time_text
+p trip.car_time_value
+p trip.car_hours
+p trip.transit_time_text
+p trip.transit_time_value
+p trip.transit_hours
 
 
 
