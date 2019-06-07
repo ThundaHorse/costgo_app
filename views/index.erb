@@ -4,60 +4,80 @@
 </head>
   <body>
   <br>
+
+    <a href='/home' class="btn btn-outline-primary ml-5" role="button">Enter Locations</a>
     <center>
       <div class="title">
         <h1>
-          <span style='color: #09BDBD'>C</span>
-          <span style='color: #09BD69'>o</span>
-          <span style='color: #09BD3F'>s</span>
-          <span style='color: #09BD15'>t</span>
-          <span style='color: grey'>-</span>
-          <span style='color: #39BD09'>G</span>
-          <span style='color: #6FBD09'>o</span>
+          <span class="border border-primary" style="padding: 10px; border-radius: 15px;">
+            <span style='color: #09BDBD'>C</span>
+            <span style='color: #09BD69'>o</span>
+            <span style='color: #09BD3F'>s</span>
+            <span style='color: #09BD15'>t</span>
+            <span style='color: grey'>-</span>
+            <span style='color: #39BD09'>G</span>
+            <span style='color: #6FBD09'>o</span>
+          </span>
         </h1>
+        <br>
         <p>Your <b>Cost</b> calculating <b>Go</b> to App!</p>
       </div>
     </center>
       <br>
       <br>
-        <div class="container"> <!-- container -->
-          <div class="card-group"> <!-- card-group -->
-            <% @data['routes'].each do |k| %>
-              <% k['legs'].each do |i, v| %>
-                
-            <div class="card"> <!-- card begin -->
-              <img src="images/directions.png" class="card-img-top" alt="directions" style="height=250px; width:250px;">
-                <div class="card-body"> <!-- card body -->
-                  <h5 class="card-title">Distance and Time</h5>
-                    <p class="card-text">Starting: <%= i['start_address'] %></p>
-                    <p class="card-text">Ending: <%= i['end_address'] %></p>
-                    <p class="lead"><%= i['distance']['text'] %> | <%= i['duration']['text'] %></p>
-                </div> <!-- card body end -->
-            </div> <!--card end -->
-            
-            <div class="card">
-              <img src="images/directions.png" class="card-img-top" alt="directions" style="height=250px; width:250px;">
-                <div class="card-body">
-                  <h5 class="card-title">Distance and Time</h5>
-                    <p class="card-text">Starting: <%= i['start_address'] %></p>
-                    <p class="card-text">Ending: <%= i['end_address'] %></p>
-                    <p class="lead"><%= i['distance']['text'] %> | <%= i['duration']['text'] %></p>
-              </div>
-            </div>
 
-            <div class="card"> <!-- card begin -->
-              <img src="images/directions.png" class="card-img-top" alt="directions" style="height=250px; width:250px;">
-                <div class="card-body"> <!-- card body -->
-                  <h5 class="card-title">Distance and Time</h5>
-                    <p class="card-text">Starting: <%= i['start_address'] %></p>
-                    <p class="card-text">Ending: <%= i['end_address'] %></p>
-                    <p class="lead"><%= i['distance']['text'] %> | <%= i['duration']['text'] %></p>
-                </div> <!-- card body end -->
-            </div> <!--card end -->
+    <div class="container"> <!-- container -->
+      <div class="card-deck"> <!-- start deck -->
+        <% @data['routes'].each do |k| %>
+          <% k['legs'].each do |i, v| %>
+
+            <div class="card bg-info border-danger"> <!-- start card -->
+              <img src="images/directions.png" class="card-img-top mx-auto d-block" alt="directions" style="height=250px; width:250px;">
+                <div class="card-body">
+                <%# <div class="shadow p-3 mb-5 bg-white rounded"> %>
+                  <h5 class="card-title shadow w-80 p-3">Distance and Time</h5>
+                  <%# </div> %>
+                    <p class="card-text" style="color: white;">Starting: <%= i['start_address'] %></p>
+                    <p class="card-text" style="color: white;">Ending: <%= i['end_address'] %></p>
+                    <p class="lead" style="color:white;"><%= i['distance']['text'] %> | <%= i['duration']['text'] %></p>
+                </div>
+
+                <div class="card-footer">
+                  <%# <<small class="text-muted">Last updated 3 mins ago</small>> %>
+                </div>
+
+            </div> <!-- end card -->
+
+            <div class="card bg-warning border-primary"> <!-- start card2 -->
+              <img src="images/transportation.png" class="card-img-top mx-auto d-block" alt="directions" style="height=250px; width:250px;">
+                <div class="card-body">
+                  <h5 class="card-title">Fare Cost</h5>
+                  <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                </div>
+
+                <div class="card-footer">
+                  <%# <small class="text-muted">Last updated 3 mins ago</small> %>
+                </div>
+
+              </div> <!-- end card2 -->
+
+            <div class="card bg-danger border-info"> <!-- start card3 -->
+              <img src="images/directions.png" class="card-img-top mx-auto d-block" alt="directions" style="height=250px; width:250px;">
+              <div class="card-body">
+                <h5 class="card-title" style="color: black;">Card title</h5>
+                <p class="card-text" style="color: black;">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+              </div>
+              
+              <div class="card-footer">
+                <%# <small class="text-muted">Last updated 3 mins ago</small> %>
+              </div>
+              
+            </div> <!-- end card3 -->
+
+          </div> <!--end card deck -->
         <% end %>
-      <% end %>
-    </div> <!-- end card group --> 
-  </div> <!-- end container -->
+    <% end %>
+</div> <!-- end container -->
 
 
 
@@ -70,7 +90,7 @@
 
 <style>
   body {
-    background-image: url("images/cartographer.png")
+    background-image: url("images/prism.png")
   }
 
   b {
@@ -78,10 +98,7 @@
   }
 
   .title {
-    border: dashed;
-    border-color: #3BAFAF #3B3BAF #4FD89C #117111;
-    border-radius: 5px 20px 5px 20px;
-    width: 250px;
+    btn-outline-primary;
   }
 
   .jumbotron {
